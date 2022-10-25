@@ -1,0 +1,6 @@
+1*1*null*0.0
+	1 Azucar 0.56
+	1 Sal 7.2
+	1 Piedra 9.99
+	1 Café 4.99
+	1 Pan 5.99

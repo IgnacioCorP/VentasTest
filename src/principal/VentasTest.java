@@ -1,106 +1,63 @@
 
 package principal;
 
+import Datos.AccesoDatos;
+import Dominio.Orden;
+import Dominio.Productos;
 import java.util.ArrayList;
 import java.util.Scanner;
-import orden.Orden;
-import orden.Productos;
+
 
 
 public class VentasTest {
      public static Scanner ent = new Scanner (System.in);
-     public static ArrayList <Orden> Or = new  ArrayList <Orden>(); 
+     
      
         
 
    
     public static void main(String[] args) {
-        menu();
+        Orden O1 = new Orden();
+        Orden O2 = new Orden();
+         
+        ArrayList <Productos> Col = new ArrayList <Productos>();
+        //CREAR 
+         
+        Productos p0 = new Productos ();
+        Productos p1 = new Productos (p0.getIdProducto(),"Azucar",0.56);
+        Productos p2 = new Productos (p0.getIdProducto(),"Sal",7.20);
+        Productos p3 = new Productos (p0.getIdProducto(),"Piedra",9.99);
+        Productos p4 = new Productos (p0.getIdProducto(),"Café",4.99);
+        Productos p5 = new Productos (p0.getIdProducto(),"Pan",5.99);
+        
+        //PRIMERA ORDEN CREADA
+        
+        O1.AgregarProducto(p1);
+        O1.AgregarProducto(p2);
+        O1.AgregarProducto(p3);
+        O1.AgregarProducto(p4);
+        O1.AgregarProducto(p5);  
+        O1.MostrarOrden();
         System.out.println("");
-    }
-    public static void menu() {
-         int select = -1; //opción elegida del usuario
-        while(select != 0){
-			
-				
-                                System.out.println("===== MENÚ =====");
-				System.out.println("1) Iniciar Orden" );				
-				System.out.println("0) Salir\n" );
-				
-                                System.out.print("Elige opción: " );
-				select = ent.nextInt(); 
-	
-				
-				switch(select){
-				case 1:      
-                                    
-                                    menu2();
-                                    
-                                   
-					break;
-				case 2: 
-
-                                  
-					break;
-				
-				case 0: 
-					System.out.println("Adios!");
-					break;
-				default:
-					System.out.println("Número no reconocido");break;
-				}
-				
-				System.out.println("\n"); //Mostrar un salto de línea en Java
-				
-			
-		}
+        O1.CalcularTotal();
+        //SEGUNDA ORDEN CREADA
+        O2.AgregarProducto(p1);
+        O2.AgregarProducto(p2);
+        O2.AgregarProducto(p3);
+        O2.AgregarProducto(p4);
+        O2.AgregarProducto(p5);            
+        O2.MostrarOrden();
+        System.out.println("");
+        O2.CalcularTotal();
+        
+        String nombreArchivo = "Orden.txt";
+        AccesoDatos Imp = new AccesoDatos();
+        Imp.crearOrdenesTxt();
+        Imp.crearProductosTxt(nombreArchivo);
+        Imp.escribirOrden(nombreArchivo, O1);
+        
+        
     }
   
-     public static void menu2() {
-         int select = -1; 
-         while(select != 0){
-
-
-            System.out.println("===== ¿DESEA CREAR PRODUCTO? =====");
-            System.out.println("1) SI" );
-            System.out.println("0) NO\n" );
-
-            System.out.print("Elige opción: " );
-            select = ent.nextInt(); 
-
-
-            switch(select){
-            case 1: 
-                 ArrayList <Productos> Pro = new  ArrayList <Productos>(); 
-                ent.nextLine();
-
-                System.out.print("\nINTRODUZCA EL NOMBRE DEL PRODUCTO: ");
-                String nom = ent.nextLine();
-
-                System.out.print("\nINTRODUZCA EL PRECIO DEL PRODUCTO: ");
-                double pre = ent.nextDouble();
-                Productos Pr = new Productos(nom,pre);                     
-                Pro.add(Pr);    
-                Orden uno;
-                uno = new Orden(Pro);
-                Or.add(uno);
-                uno.AgregarProducto(Pr);
-                uno.MostrarOrden();
-                uno.CalcularTotal();
-                    break;
-           				
-            case 0: 
-                    System.out.println("Adios!");
-                    break;
-            default:
-                    System.out.println("Número no reconocido");
-                    break;
-            }
-
-            System.out.println("\n"); 
-                                  
-        
-        }
-    }
  
 }
